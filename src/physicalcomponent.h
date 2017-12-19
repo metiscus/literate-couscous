@@ -19,5 +19,7 @@ public:
     float get_volume() const;
     uint32_t get_value() const;
 
+    std::unique_ptr<PhysicalComponent> clone() const;
+
     void staticjson_init(staticjson::ObjectHandler *h);
 };

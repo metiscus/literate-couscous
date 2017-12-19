@@ -36,6 +36,11 @@ uint32_t PhysicalComponent::get_value() const
     return value_;
 }
 
+std::unique_ptr<PhysicalComponent> PhysicalComponent::clone() const
+{
+    return std::make_unique<PhysicalComponent>(*this);
+}
+
 void PhysicalComponent::staticjson_init(ObjectHandler *h)
 {
     h->add_property("type", &type_);

@@ -29,4 +29,6 @@ public:
     void staticjson_init(staticjson::ObjectHandler *h);
 
     void set_physical_component(std::unique_ptr<PhysicalComponent> component);
+
+    std::unique_ptr<Object> clone() const;
 };

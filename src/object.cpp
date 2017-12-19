@@ -48,3 +48,15 @@ void Object::staticjson_init(ObjectHandler *h)
     h->add_property("name", &name_);
     h->add_property("physical", &physical_, Flags::Optional);
 }
+
+std::unique_ptr<Object> Object::clone() const
+{
+    auto obj = std::make_unique<Object>(id_, type_, name_);
+
+    if(physical_.has_value())
+    {
+        obj->physical_ = physical_.value()->clone();
+    }
+
+    return obj;
+}
