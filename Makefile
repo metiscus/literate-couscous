@@ -9,8 +9,6 @@ default: test
 
 libStaticJson.a: extern/StaticJSON/src/staticjson.o
 	ar -rcs libStaticJson.a extern/StaticJSON/src/staticjson.o
-	rm -f extern/StaticJSON/src/staticjson.o
-
 
 SRC:=\
 	src/test.cpp\
