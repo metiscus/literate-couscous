@@ -48,6 +48,14 @@ PhysicalComponent* Object::get_physical_component()
         return nullptr;
 }
 
+const PhysicalComponent* Object::get_physical_component() const
+{
+    if(physical_.has_value())
+        return physical_.value().get();
+    else
+        return nullptr;
+}
+
 void Object::set_physical_component(std::unique_ptr<PhysicalComponent> component)
 {
     physical_ = std::move(component);

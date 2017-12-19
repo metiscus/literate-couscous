@@ -59,6 +59,16 @@ void Character::set_attributes(Attributes atts)
     attributes_ = atts;
 }
 
+Inventory& Character::get_inventory()
+{
+    return inventory_;
+}
+
+const Inventory& Character::get_inventory() const
+{
+    return inventory_;
+}
+
 void Character::staticjson_init(staticjson::ObjectHandler *h)
 {
     h->add_property("id", &id_);
@@ -66,4 +76,5 @@ void Character::staticjson_init(staticjson::ObjectHandler *h)
     h->add_property("name", &name_);
     h->add_property("race_id", &race_id_);
     h->add_property("attributes", &attributes_);
+    h->add_property("inventory", &inventory_);
 }

@@ -2,6 +2,7 @@
 
 #include "attributes.h"
 #include <cstdint>
+#include "inventory.h"
 #include <staticjson/staticjson.hpp>
 #include <string>
 
@@ -16,8 +17,10 @@ class Character
     uint32_t race_id_;
     Attributes attributes_;
 
+    Inventory inventory_;
+
 public:
-    Character(uint32_t id);
+    Character(uint32_t id = 0);
 
     uint32_t    get_id() const;
     uint32_t    get_type() const;
@@ -30,6 +33,9 @@ public:
     void set_name(const std::string& name);
     void set_race_id(uint32_t id);
     void set_attributes(Attributes atts);
+
+    Inventory& get_inventory();
+    const Inventory& get_inventory() const;
 
     void staticjson_init(staticjson::ObjectHandler *h);
 };

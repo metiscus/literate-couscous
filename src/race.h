@@ -46,9 +46,9 @@ public:
 
     void staticjson_init(staticjson::ObjectHandler *h)
     {
-         h->add_property("id", &id_);
-         h->add_property("name", &name_);
-         h->add_property("plural", &plural_);
-         h->add_property("attributes", &attributes_);
+        h->add_property("id", &id_);
+        h->add_property("name", &name_);
+        h->add_property("plural", &plural_);
+        h->add_property("attributes", &attributes_);
     }
 };

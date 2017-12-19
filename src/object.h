@@ -8,7 +8,7 @@
 #include <string>
 #include <unordered_map>
 
-class PhysicalComponent;
+#include "physicalcomponent.h"
 
 class Object
 {
@@ -20,7 +20,7 @@ class Object
     std::optional<uint32_t> quantity_;
 
 public:
-    Object(uint32_t id, uint32_t type, std::string name);
+    Object(uint32_t id = 0, uint32_t type = 0, std::string name = "");
 
     uint32_t get_id() const;
     uint32_t get_type() const;
@@ -29,6 +29,7 @@ public:
     uint32_t get_quantity() const;
 
     PhysicalComponent* get_physical_component();
+    const PhysicalComponent* get_physical_component() const;
 
     void set_physical_component(std::unique_ptr<PhysicalComponent> component);
 
