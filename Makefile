@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -g -Wall -Wextra -std=c++11 -MD
+CXXFLAGS := -g -Wall -Wextra -std=c++17 -MD
 LDFLAGS := -L.
 
 JSON_CFLAGS := -Iextern/StaticJSON/include -Iextern/rapidjson/include
@@ -13,8 +13,8 @@ libStaticJson.a: extern/StaticJSON/src/staticjson.o
 
 
 SRC:=\
+	src/test.cpp\
 	src/object.cpp\
-	src/component.cpp\
 	src/physicalcomponent.cpp
 
 OBJ:=$(SRC:.cpp=.o)

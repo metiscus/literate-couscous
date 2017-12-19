@@ -1,26 +1,33 @@
 #pragma once
 
 #include <cstdint>
+#include <staticjson/staticjson.hpp>
 #include <string>
 
+enum class ComponentType
+{
+    Physical
+};
 
+template <typename T>
 class Component
 {
-public:
-    enum Type
-    {
-        Physical
-    };
-
-private:
-    Type type_;
+protected:
+    ComponentType type_;
     std::string name_;
 
 protected:
-    Component(Type type, std::string name);
-    virtual ~Component() = default;
+    Component(ComponentType type, std::string name)
+        : type_(type), name_(name)
+    {
+        ;
+    }
 
 public:
-    Type get_type() const;
-    std::string get_name() const;
+    ComponentType get_type() const { return type_; }
+    std::string get_name() const { return name_; }
 };
+
+STATICJSON_DECLARE_ENUM(ComponentType,
+    {"Physical", ComponentType::Physical}
+)
