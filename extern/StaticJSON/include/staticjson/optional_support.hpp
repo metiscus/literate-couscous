@@ -13,7 +13,7 @@ namespace nonpublic
     template <typename T>
     using optional = std::optional<T>;
 
-    auto& nullopt = std::nullopt;
+    static auto& nullopt = std::nullopt;
 }
 }
 
