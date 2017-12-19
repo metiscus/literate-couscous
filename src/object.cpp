@@ -9,6 +9,7 @@ Object::Object(uint32_t id, uint32_t type, std::string name)
     : id_(id)
     , type_(type)
     , name_(name)
+    , is_stackable_(false)
 {
     ;
 }
@@ -28,6 +29,11 @@ std::string Object::get_name() const
     return name_;
 }
 
+bool  Object::get_is_stackable() const
+{
+    return is_stackable_;
+}
+
 PhysicalComponent* Object::get_physical_component()
 {
     if(physical_.has_value())
@@ -41,12 +47,9 @@ void Object::set_physical_component(std::unique_ptr<PhysicalComponent> component
     physical_ = std::move(component);
 }
 
-void Object::staticjson_init(ObjectHandler *h)
+void Object::set_is_stackable(bool value)
 {
-    h->add_property("id", &id_);
-    h->add_property("type", &type_);
-    h->add_property("name", &name_);
-    h->add_property("physical", &physical_, Flags::Optional);
+    is_stackable_ = value;
 }
 
 std::unique_ptr<Object> Object::clone() const
@@ -59,4 +62,13 @@ std::unique_ptr<Object> Object::clone() const
     }
 
     return obj;
+}
+
+void Object::staticjson_init(ObjectHandler *h)
+{
+    h->add_property("id", &id_);
+    h->add_property("type", &type_);
+    h->add_property("name", &name_);
+    h->add_property("is_stackable", &is_stackable_);
+    h->add_property("physical", &physical_, Flags::Optional);
 }

@@ -11,9 +11,10 @@ libStaticJson.a: extern/StaticJSON/src/staticjson.o
 	ar -rcs libStaticJson.a extern/StaticJSON/src/staticjson.o
 
 SRC:=\
-	src/test.cpp\
+	src/character.cpp\
 	src/object.cpp\
-	src/physicalcomponent.cpp
+	src/physicalcomponent.cpp\
+	src/test.cpp\
 
 OBJ:=$(SRC:.cpp=.o)
 
