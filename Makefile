@@ -12,6 +12,7 @@ libStaticJson.a: extern/StaticJSON/src/staticjson.o
 
 SRC:=\
 	src/character.cpp\
+	src/inventory.cpp\
 	src/object.cpp\
 	src/physicalcomponent.cpp\
 	src/test.cpp\
