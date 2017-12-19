@@ -1,6 +1,6 @@
 #include "object.h"
 #include "physicalcomponent.h"
-
+#include <cassert>
 #include <staticjson/optional_support.hpp>
 
 using namespace staticjson;
@@ -34,6 +34,12 @@ bool  Object::get_is_stackable() const
     return is_stackable_;
 }
 
+uint32_t Object::get_quantity() const
+{
+    if(is_stackable_) return quantity_.value();
+    return 1;
+}
+
 PhysicalComponent* Object::get_physical_component()
 {
     if(physical_.has_value())
@@ -50,6 +56,36 @@ void Object::set_physical_component(std::unique_ptr<PhysicalComponent> component
 void Object::set_is_stackable(bool value)
 {
     is_stackable_ = value;
+    if(value == true)
+    {
+        quantity_ = 1;
+    }
+    else
+    {
+        quantity_ = std::nullopt;
+    }
+}
+
+void Object::change_quantity(int32_t value)
+{
+    assert(is_stackable_);
+    assert(quantity_.has_value());
+    assert(uint32_t(value) < quantity_);
+    if(quantity_.has_value())
+    {
+        quantity_ = quantity_.value() + value;
+    }
+}
+
+void Object::set_quantity(uint32_t value)
+{
+    assert(is_stackable_);
+    assert(quantity_.has_value());
+    assert(value != 0);
+    if(quantity_.has_value())
+    {
+        quantity_ = value;
+    }
 }
 
 std::unique_ptr<Object> Object::clone() const
@@ -70,5 +106,14 @@ void Object::staticjson_init(ObjectHandler *h)
     h->add_property("type", &type_);
     h->add_property("name", &name_);
     h->add_property("is_stackable", &is_stackable_);
+    h->add_property("quantity", &quantity_, Flags::Optional);
     h->add_property("physical", &physical_, Flags::Optional);
 }
+
+#if 0
+bool Object::operator=(const Object& rhs) const
+{
+    //This may be tricky later...
+    return rhs.type_ == type_;
+}
+#endif
