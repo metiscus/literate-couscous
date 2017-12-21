@@ -16,6 +16,8 @@ SRC:=\
 	src/object.cpp\
 	src/physicalcomponent.cpp\
 	src/test.cpp\
+	src/submap.cpp\
+	src/map.cpp\
 
 OBJ:=$(SRC:.cpp=.o)
 

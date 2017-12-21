@@ -57,12 +57,6 @@ struct Converter<Inventory>
             }
         }
         return nullptr;
-
-/*        bool success = value.parseISO8601(shadow);
-        if (success)
-            return nullptr;
-        return std::make_unique<CustomError>("Invalid ISO 8601 string");
-*/
     }
 
     static void to_shadow(const Inventory& value, shadow_type& shadow)
