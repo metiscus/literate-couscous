@@ -6,7 +6,8 @@
 
 enum class ComponentType
 {
-    Physical
+    Physical,
+    Weapon,
 };
 
 template <typename T>
@@ -29,5 +30,6 @@ public:
 };
 
 STATICJSON_DECLARE_ENUM(ComponentType,
-    {"Physical", ComponentType::Physical}
+    {"Physical", ComponentType::Physical},
+    {"Weapon", ComponentType::Weapon},
 )

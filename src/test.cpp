@@ -7,6 +7,7 @@
 #include <fstream>
 #include <set>
 #include <cstdlib>
+#include "map.h"
 
 int main(int argc, char** argv)
 {
@@ -29,32 +30,12 @@ int main(int argc, char** argv)
     Character chr2;
     staticjson::from_json_string(chrstr.c_str(), &chr2, nullptr);
 
-#if 0
-    int width  = 100;
-    int height = 50;
-    int depth  = 10;
-    std::set<int> points;
-    //int index = x + y * (width + depth) + z * depth;
-    for(int i=0; i<100; ++i)
-    {
-        for(int j=0; j<50; ++j)
-        {
-            for(int k=0; k<10; ++k)
-            {
-                int index = i * (width * depth) + j * depth + k;
-                std::cerr<<"["<<j<<","<<i<<"]\t"<<index<<"\n";
-                if(points.count(index))
-                {
-                    abort();
-                }
-                else
-                {
-                    points.insert(index);
-                }
-            }
-        }
-    }
-#endif
+
+
+    Map m(1024, 1024, 1);
+    std::string chrstr2 = staticjson::to_json_string(m);
+    std::cout<<chrstr2<<"\n";
+
 
     return 0;
 }

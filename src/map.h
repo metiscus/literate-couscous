@@ -24,6 +24,8 @@ private:
     const MapTile* get_tile_at(int32_t x, int32_t y) const;
 
 public:
+    Map(int32_t width, int32_t height, int32_t depth);
+
     bool passable(int32_t x, int32_t y) const;
     bool impassable(int32_t x, int32_t y) const;
     int32_t move_cost(int32_t x, int32_t y) const;

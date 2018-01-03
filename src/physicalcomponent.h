@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <staticjson/staticjson.hpp>
 
 #include "component.h"
 

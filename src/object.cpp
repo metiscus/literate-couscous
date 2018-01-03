@@ -40,27 +40,6 @@ uint32_t Object::get_quantity() const
     return 1;
 }
 
-PhysicalComponent* Object::get_physical_component()
-{
-    if(physical_.has_value())
-        return physical_.value().get();
-    else
-        return nullptr;
-}
-
-const PhysicalComponent* Object::get_physical_component() const
-{
-    if(physical_.has_value())
-        return physical_.value().get();
-    else
-        return nullptr;
-}
-
-void Object::set_physical_component(std::unique_ptr<PhysicalComponent> component)
-{
-    physical_ = std::move(component);
-}
-
 void Object::set_is_stackable(bool value)
 {
     is_stackable_ = value;
@@ -102,7 +81,7 @@ std::unique_ptr<Object> Object::clone() const
 
     if(physical_.has_value())
     {
-        obj->physical_ = physical_.value()->clone();
+        obj->physical_ = physical_.clone();
     }
 
     return obj;
@@ -115,7 +94,8 @@ void Object::staticjson_init(ObjectHandler *h)
     h->add_property("name", &name_);
     h->add_property("is_stackable", &is_stackable_);
     h->add_property("quantity", &quantity_, Flags::Optional);
-    h->add_property("physical", &physical_, Flags::Optional);
+    h->add_property("physical", &physical_);
+    h->add_property("weapon", &weapon_);
 }
 
 #if 0

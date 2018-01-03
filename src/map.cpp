@@ -2,6 +2,14 @@
 #include "maptile.h"
 #include "object.h"
 
+Map::Map(int32_t width, int32_t height, int32_t depth)
+    : width_(width)
+    , height_(height)
+    , depth_(depth)
+{
+    tiles_.resize(width*height*depth);
+}
+
 bool Map::inbounds(Position position) const
 {
     if((position.x < 0)       ||
