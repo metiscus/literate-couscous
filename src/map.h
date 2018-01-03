@@ -3,8 +3,8 @@
 #include <cstdint>
 #include "position.h"
 #include <vector>
-#include "submap.h"
-
+#include "maptile.h"
+#include <staticjson/staticjson.hpp>
 
 class Map
 {
@@ -17,8 +17,11 @@ private:
     bool inbounds(Position position) const;
     bool inbounds_z(Position position) const;
 
-    SubMap* get_submap_at(Position position);
-    SubMap* get_submap_at(int32_t x, int32_t y);
+    MapTile* get_tile_at(Position position);
+    MapTile* get_tile_at(int32_t x, int32_t y);
+
+    const MapTile* get_tile_at(Position position) const;
+    const MapTile* get_tile_at(int32_t x, int32_t y) const;
 
 public:
     bool passable(int32_t x, int32_t y) const;
@@ -28,4 +31,6 @@ public:
 
     MapTile& maptile_at(Position position);
     const MapTile& maptile_at(Position position) const;
+
+    void staticjson_init(staticjson::ObjectHandler *h);
 };
