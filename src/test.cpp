@@ -32,10 +32,19 @@ int main(int argc, char** argv)
 
 
 
-    Map m(1024, 1024, 1);
+    constexpr int size = 128;
+    Map m(size, size, 1);
+
+    for(int i=0; i<size; ++i)
+    {
+        for(int j=0; j<size; ++j)
+        {
+            m.at(i, j).set_terrain(TerrainId::Outdoor_Grass);
+        }
+    }
+
     std::string chrstr2 = staticjson::to_json_string(m);
     std::cout<<chrstr2<<"\n";
-
 
     return 0;
 }

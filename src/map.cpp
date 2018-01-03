@@ -116,7 +116,23 @@ int32_t Map::move_cost(int32_t x, int32_t y) const
 
 }
 
-MapTile& Map::maptile_at(Position position)
+const MapTile& Map::at(int32_t x, int32_t y) const
+{
+    assert(inbounds(Position(x, y, 1)));
+
+    uint32_t index = 1 + x * (width_ * depth_) + y * depth_;
+    return tiles_[index];
+}
+
+MapTile& Map::at(int32_t x, int32_t y)
+{
+    assert(inbounds(Position(x, y, 1)));
+
+    uint32_t index = 1 + x * (width_ * depth_) + y * depth_;
+    return tiles_[index];
+}
+
+MapTile& Map::at(Position position)
 {
     assert(inbounds(position));
 
@@ -124,7 +140,7 @@ MapTile& Map::maptile_at(Position position)
     return tiles_[index];
 }
 
-const MapTile& Map::maptile_at(Position position) const
+const MapTile& Map::at(Position position) const
 {
     assert(inbounds(position));
 

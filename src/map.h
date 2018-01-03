@@ -31,8 +31,10 @@ public:
     int32_t move_cost(int32_t x, int32_t y) const;
 
 
-    MapTile& maptile_at(Position position);
-    const MapTile& maptile_at(Position position) const;
+    const MapTile& at(int32_t x, int32_t y) const;
+    MapTile& at(int32_t x, int32_t y);
+    MapTile& at(Position position);
+    const MapTile& at(Position position) const;
 
     void staticjson_init(staticjson::ObjectHandler *h);
 };
