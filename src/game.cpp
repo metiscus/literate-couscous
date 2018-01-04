@@ -24,13 +24,16 @@ void Game::new_game()
     here.latitude = -50.0f;
     here.max_temperature.a = 4.2f;
     here.max_temperature.b = 13.07f;
-    here.max_temperature.a = 3.95f;
-    here.max_temperature.b = 12.8f;
+    here.min_temperature.a = 3.21f;
+    here.min_temperature.b = 12.2f;
 
     weather_.set_location_info(here);
     weather_.set_time(time_);
 
     std::cout<<"The date is: "<<time_.get_date()<<"\n";
+    std::cout<<"The length of the day is: "<<weather_.get_mean_daylight_hours()<<"\n";
+    std::cout<<"The high today is: "<<weather_.compute_day_max_temperature()<<"\n";
+    std::cout<<"The low today is: "<<weather_.compute_day_min_temperature()<<"\n";
 }
 
 void Game::load_game(const std::string& file)

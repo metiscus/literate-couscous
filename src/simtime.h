@@ -19,6 +19,8 @@ struct Simtime
 
     void advance(uint32_t year,  uint32_t month, uint32_t day, uint32_t hour, uint32_t minute, uint32_t second);
 
+    uint32_t get_julian_day() const;
+
     char const* get_day() const;
     char const* get_month() const;
 

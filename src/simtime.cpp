@@ -144,6 +144,11 @@ void Simtime::advance(uint32_t year_, uint32_t month_, uint32_t day_, uint32_t h
     }
 }
 
+uint32_t Simtime::get_julian_day() const
+{
+    return compute_day_in_year(year, month, day);
+}
+
 char const* Simtime::get_day() const
 {
     uint32_t jan_1_day = R(1 + 5*R(year - 1, 4) + 4*R(year - 1, 100) + 6*R(year - 1, 400), 7);
