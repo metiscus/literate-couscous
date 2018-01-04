@@ -20,6 +20,7 @@ SRC:=\
 	src/map.cpp\
 	src/game.cpp\
 	src/simtime.cpp\
+	src/weather.cpp\
 
 OBJ:=$(SRC:.cpp=.o)
 

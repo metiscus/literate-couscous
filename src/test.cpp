@@ -52,6 +52,7 @@ int main(int argc, char** argv)
 
 #endif
     Game g;
+    g.new_game();
 
     return 0;
 }

@@ -7,6 +7,7 @@
 #include "object.h"
 #include "race.h"
 #include "simtime.h"
+#include "weather.h"
 
 class Game
 {
@@ -15,6 +16,7 @@ class Game
     std::map<uint32_t, Race> races_;
     
     Simtime time_;
+    Weather weather_;
 
     void load_object_blueprints();
     void load_races();

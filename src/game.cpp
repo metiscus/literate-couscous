@@ -17,6 +17,32 @@ Game::Game()
     load_races();
 }
 
+void Game::new_game()
+{
+    // Configure time and weather
+    LocationInfo here;
+    here.latitude = -50.0f;
+    here.max_temperature.a = 4.2f;
+    here.max_temperature.b = 13.07f;
+    here.max_temperature.a = 3.95f;
+    here.max_temperature.b = 12.8f;
+
+    weather_.set_location_info(here);
+    weather_.set_time(time_);
+
+    std::cout<<"The date is: "<<time_.get_date()<<"\n";
+}
+
+void Game::load_game(const std::string& file)
+{
+
+}
+
+void Game::save_game(const std::string& file)
+{
+
+}
+
 void Game::load_object_blueprints()
 {
     fs::path data_dir (s_data_path_);
@@ -81,19 +107,4 @@ void Game::load_races()
             }
         }
     }
-}
-
-void Game::new_game()
-{
-    ;
-}
-
-void Game::load_game(const std::string& file)
-{
-
-}
-
-void Game::save_game(const std::string& file)
-{
-
 }

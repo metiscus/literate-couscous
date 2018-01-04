@@ -1,6 +1,7 @@
 #include "simtime.h"
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 namespace {
     inline bool is_leap_year(uint32_t year)
@@ -52,6 +53,23 @@ namespace {
     inline uint32_t R(uint32_t l, uint32_t r)
     {
         return l % r;
+    }
+
+    inline std::string number_string(uint32_t num)
+    {
+        std::stringstream ss;
+        ss<<num;
+        
+        uint32_t last_digit = num % 10;
+        switch(last_digit)
+        {
+            case 1: ss<<"st"; break;
+            case 2: ss<<"nd"; break;
+            case 3: ss<<"rd"; break;
+            default: ss<<"th"; break;
+        }
+
+        return ss.str();
     }
 }
 
@@ -126,7 +144,7 @@ void Simtime::advance(uint32_t year_, uint32_t month_, uint32_t day_, uint32_t h
     }
 }
 
-char const* Simtime::get_day()
+char const* Simtime::get_day() const
 {
     uint32_t jan_1_day = R(1 + 5*R(year - 1, 4) + 4*R(year - 1, 100) + 6*R(year - 1, 400), 7);
     uint32_t day_in_year = compute_day_in_year(year, month, day);
@@ -147,7 +165,7 @@ char const* Simtime::get_day()
     }
 }
 
-char const* Simtime::get_month()
+char const* Simtime::get_month() const
 {
     switch(month)
     {
@@ -167,6 +185,13 @@ char const* Simtime::get_month()
             assert(false);
             break;
     }
+}
+
+std::string Simtime::get_date() const
+{
+    std::stringstream date;
+    date<<get_day()<<" the "<<number_string(day)<<" of "<<get_month()<<" in the year "<<year;
+    return date.str();
 }
 
 void Simtime::staticjson_init(staticjson::ObjectHandler *h)
