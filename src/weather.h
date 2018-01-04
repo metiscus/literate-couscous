@@ -27,6 +27,8 @@ public:
 
     float get_mean_daylight_hours() const;
 
-    float compute_day_max_temperature();
-    float compute_day_min_temperature();
+    float compute_day_max_temperature() const;
+    float compute_day_min_temperature() const;
+
+    float compute_temperature() const;
 };

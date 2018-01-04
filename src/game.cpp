@@ -2,6 +2,7 @@
 
 #include <boost/filesystem.hpp>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <staticjson/staticjson.hpp>
@@ -34,6 +35,15 @@ void Game::new_game()
     std::cout<<"The length of the day is: "<<weather_.get_mean_daylight_hours()<<"\n";
     std::cout<<"The high today is: "<<weather_.compute_day_max_temperature()<<"\n";
     std::cout<<"The low today is: "<<weather_.compute_day_min_temperature()<<"\n";
+    
+    for(int i=48; i>0; --i)
+    {
+        std::cout<<"The time is: "<<std::setfill('0')<<std::setw(2)<<time_.hour<<":"<<std::setw(2)<<time_.minute<<":"<<std::setw(2)<<time_.second<<"\n";
+        std::cout<<"The current temperature is: "<<weather_.compute_temperature()<<"\n";
+
+        time_.advance(0, 0, 0, 0, 30, 0);
+        weather_.set_time(time_);
+    }
 }
 
 void Game::load_game(const std::string& file)
