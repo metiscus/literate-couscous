@@ -10,10 +10,13 @@
 #include <cstdlib>
 #include "map.h"
 
+#include "race.h"
+
 #include "game.h"
 
 int main(int argc, char** argv)
 {
+#if 0
     auto obj = std::make_unique<Object>(0, 1, "sword");
     obj->set_physical_component(std::move(std::make_unique<PhysicalComponent>( 10.0, 1.5, 10 )));
     obj->set_weapon_component(std::move(std::make_unique<WeaponComponent>(WeaponType::Melee, 0, 0, 0)));
@@ -47,6 +50,7 @@ int main(int argc, char** argv)
     std::string chrstr2 = staticjson::to_json_string(m);
     //std::cout<<chrstr2<<"\n";
 
+#endif
     Game g;
 
     return 0;

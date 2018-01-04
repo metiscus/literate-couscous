@@ -2,7 +2,7 @@
 #include "maptile.h"
 #include "object.h"
 
-Map::Map(int32_t width, int32_t height, int32_t depth)
+Map::Map(uint32_t width, uint32_t height, int32_t depth)
     : width_(width)
     , height_(height)
     , depth_(depth)
@@ -44,7 +44,7 @@ MapTile* Map::get_tile_at(Position position)
     return &tiles_[index];
 }
 
-MapTile* Map::get_tile_at(int32_t x, int32_t y)
+MapTile* Map::get_tile_at(uint32_t x, uint32_t y)
 {
     if(!inbounds(Position(x, y, 0)))
     {
@@ -66,7 +66,7 @@ const MapTile* Map::get_tile_at(Position position) const
     return &tiles_[index];
 }
 
-const MapTile* Map::get_tile_at(int32_t x, int32_t y) const
+const MapTile* Map::get_tile_at(uint32_t x, uint32_t y) const
 {
     if(!inbounds(Position(x, y, 0)))
     {
@@ -77,7 +77,7 @@ const MapTile* Map::get_tile_at(int32_t x, int32_t y) const
     return &tiles_[index];
 }
 
-bool Map::passable(int32_t x, int32_t y) const
+bool Map::passable(uint32_t x, uint32_t y) const
 {
     const MapTile* sm = get_tile_at(x, y);
     if(!sm)
@@ -106,17 +106,17 @@ bool Map::passable(int32_t x, int32_t y) const
     }
 }
 
-bool Map::impassable(int32_t x, int32_t y) const
+bool Map::impassable(uint32_t x, uint32_t y) const
 {
     return !passable(x, y);
 }
 
-int32_t Map::move_cost(int32_t x, int32_t y) const
+int32_t Map::move_cost(uint32_t x, uint32_t y) const
 {
 
 }
 
-const MapTile& Map::at(int32_t x, int32_t y) const
+const MapTile& Map::at(uint32_t x, uint32_t y) const
 {
     assert(inbounds(Position(x, y, 1)));
 
@@ -124,7 +124,7 @@ const MapTile& Map::at(int32_t x, int32_t y) const
     return tiles_[index];
 }
 
-MapTile& Map::at(int32_t x, int32_t y)
+MapTile& Map::at(uint32_t x, uint32_t y)
 {
     assert(inbounds(Position(x, y, 1)));
 

@@ -1,0 +1,19 @@
+{
+    "attributes": {
+        "agility": {
+            "base": 10,
+            "modifier": 0
+        },
+        "intelligence": {
+            "base": 10,
+            "modifier": 0
+        },
+        "strength": {
+            "base": 10,
+            "modifier": 0
+        }
+    },
+    "id": 0,
+    "name": "human",
+    "plural": "humans"
+}

@@ -19,6 +19,7 @@ SRC:=\
 	src/maptile.cpp\
 	src/map.cpp\
 	src/game.cpp\
+	src/simtime.cpp\
 
 OBJ:=$(SRC:.cpp=.o)
 

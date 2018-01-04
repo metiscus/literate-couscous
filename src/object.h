@@ -20,8 +20,7 @@ class Object
     uint32_t id_;
     uint32_t type_;
     std::string name_;
-    //std::optional<std::unique_ptr<PhysicalComponent>> physical_;
-    //std::optional<std::unique_ptr<WeaponComponent>> physical_;
+
     HasComponent<PhysicalComponent> physical_;
     HasComponent<WeaponComponent> weapon_;
 

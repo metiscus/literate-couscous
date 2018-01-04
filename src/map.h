@@ -9,8 +9,8 @@
 class Map
 {
     std::vector<MapTile> tiles_;
-    int32_t width_;
-    int32_t height_;
+    uint32_t width_;
+    uint32_t height_;
     int32_t depth_;
 
 private:
@@ -18,21 +18,21 @@ private:
     bool inbounds_z(Position position) const;
 
     MapTile* get_tile_at(Position position);
-    MapTile* get_tile_at(int32_t x, int32_t y);
+    MapTile* get_tile_at(uint32_t x, uint32_t y);
 
     const MapTile* get_tile_at(Position position) const;
-    const MapTile* get_tile_at(int32_t x, int32_t y) const;
+    const MapTile* get_tile_at(uint32_t x, uint32_t y) const;
 
 public:
-    Map(int32_t width, int32_t height, int32_t depth);
+    Map(uint32_t width, uint32_t height, int32_t depth);
 
-    bool passable(int32_t x, int32_t y) const;
-    bool impassable(int32_t x, int32_t y) const;
-    int32_t move_cost(int32_t x, int32_t y) const;
+    bool passable(uint32_t x, uint32_t y) const;
+    bool impassable(uint32_t x, uint32_t y) const;
+    int32_t move_cost(uint32_t x, uint32_t y) const;
 
 
-    const MapTile& at(int32_t x, int32_t y) const;
-    MapTile& at(int32_t x, int32_t y);
+    const MapTile& at(uint32_t x, uint32_t y) const;
+    MapTile& at(uint32_t x, uint32_t y);
     MapTile& at(Position position);
     const MapTile& at(Position position) const;
 

@@ -8,7 +8,7 @@ struct Attribute
     int modifier;
 
     Attribute()
-        : base(5), modifier(0)
+        : base(10), modifier(0)
     {}
 
     inline void reset()

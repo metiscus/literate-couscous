@@ -13,7 +13,7 @@ class Race
     Attributes attributes_;
 
 public:
-    Race(uint32_t id, std::string name, std::string plural)
+    Race(uint32_t id = 0, std::string name = "invalid", std::string plural = "invalids")
         : id_(id), name_(name), plural_(plural)
     {
         ;
