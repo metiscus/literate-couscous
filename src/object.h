@@ -10,6 +10,7 @@
 #include "hascomponent.h"
 #include "physicalcomponent.h"
 #include "weaponcomponent.h"
+#include "wearablecomponent.h"
 
 
 class Object;
@@ -23,6 +24,7 @@ class Object
 
     HasComponent<PhysicalComponent> physical_;
     HasComponent<WeaponComponent> weapon_;
+    HasComponent<WearableComponent> wearable_;
 
     bool is_stackable_;
     std::optional<uint32_t> quantity_;
@@ -64,6 +66,21 @@ public:
     void set_weapon_component(std::unique_ptr<WeaponComponent> component)
     {
         weapon_.set_value(std::move(component));
+    }
+
+    WearableComponent* get_wearable_component()
+    {
+        return wearable_.value();
+    }
+
+    const WearableComponent* get_wearable_component() const
+    {
+        return wearable_.value();
+    }
+
+    void set_wearable_component(std::unique_ptr<WearableComponent> component)
+    {
+        wearable_.set_value(std::move(component));
     }
 
 

@@ -94,8 +94,9 @@ void Object::staticjson_init(ObjectHandler *h)
     h->add_property("name", &name_);
     h->add_property("is_stackable", &is_stackable_);
     h->add_property("quantity", &quantity_, Flags::Optional);
-    h->add_property("physical", &physical_);
+    h->add_property("physical", &physical_, Flags::Optional);
     h->add_property("weapon", &weapon_);
+    h->add_property("wearable", &wearable_, Flags::Optional);
 }
 
 #if 0

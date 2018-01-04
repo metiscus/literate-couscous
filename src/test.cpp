@@ -1,6 +1,7 @@
 #include "object.h"
 #include "physicalcomponent.h"
 #include "weaponcomponent.h"
+#include "wearablecomponent.h"
 #include "inventory.h"
 #include "character.h"
 #include <staticjson/staticjson.hpp>
@@ -50,7 +51,14 @@ int main(int argc, char** argv)
     std::string chrstr2 = staticjson::to_json_string(m);
     //std::cout<<chrstr2<<"\n";
 
+#else
+    auto obj = std::make_unique<Object>(0, 1, "leather jacket");
+    obj->set_physical_component(std::move(std::make_unique<PhysicalComponent>( 10.0, 1.5, 10 )));
+    obj->set_wearable_component(std::move(std::make_unique<WearableComponent>(LimbType::Torso)));
 #endif
+    std::string sword = staticjson::to_json_string(*obj);
+    std::cout<<sword<<"\n";
+
     Game g;
     g.new_game();
 

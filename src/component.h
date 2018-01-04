@@ -8,6 +8,7 @@ enum class ComponentType
 {
     Physical,
     Weapon,
+    Wearable,
 };
 
 template <typename T>

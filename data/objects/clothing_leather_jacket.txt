@@ -1,27 +1,24 @@
 {
-    "id": 1,
+    "id": 0,
     "is_stackable": false,
-    "name": "club",
+    "name": "leather jacket",
     "physical": {
         "component": {
             "name": "Physical Component",
             "type": "Physical",
             "value": 10,
             "volume": 1.5,
-            "weight": 15
+            "weight": 10
         }
     },
     "quantity": null,
     "type": 1,
     "weapon": {
-        "component": {
-            "ammo_capacity": 0,
-            "max_range": 1,
-            "min_range": 0,
-            "type": "Melee"
-        }
+        "component": null
     },
     "wearable": {
-        "component" : null
+        "component": [
+            "\"Torso\""
+        ]
     }
 }
