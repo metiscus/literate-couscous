@@ -31,9 +31,20 @@ class WeaponComponent
 public:
     WeaponComponent()
         : Component(ComponentType::Weapon, "Weapon Component")
+        , type_(WeaponType::Invalid)
         , ammo_capacity_(0)
         , max_range_(0)
         , min_range_(0)
+    {
+
+    }
+
+    WeaponComponent(WeaponType type, uint32_t ammo_capacity, uint32_t max_range, uint32_t min_range)
+        : Component(ComponentType::Weapon, "Weapon Component")
+        , type_(type)
+        , ammo_capacity_(ammo_capacity)
+        , max_range_(max_range)
+        , min_range_(min_range)
     {
 
     }

@@ -1,5 +1,6 @@
 #include "object.h"
 #include "physicalcomponent.h"
+#include "weaponcomponent.h"
 #include "inventory.h"
 #include "character.h"
 #include <staticjson/staticjson.hpp>
@@ -9,11 +10,13 @@
 #include <cstdlib>
 #include "map.h"
 
+#include "game.h"
+
 int main(int argc, char** argv)
 {
     auto obj = std::make_unique<Object>(0, 1, "sword");
-    auto physical_component = std::make_unique<PhysicalComponent>( 10.0, 1.5, 10 );
-    obj->set_physical_component(std::move(physical_component));
+    obj->set_physical_component(std::move(std::make_unique<PhysicalComponent>( 10.0, 1.5, 10 )));
+    obj->set_weapon_component(std::move(std::make_unique<WeaponComponent>(WeaponType::Melee, 0, 0, 0)));
 
     std::string sword = staticjson::to_json_string(*obj);
     std::cout<<sword<<"\n";
@@ -30,8 +33,6 @@ int main(int argc, char** argv)
     Character chr2;
     staticjson::from_json_string(chrstr.c_str(), &chr2, nullptr);
 
-
-
     constexpr int size = 128;
     Map m(size, size, 1);
 
@@ -44,7 +45,9 @@ int main(int argc, char** argv)
     }
 
     std::string chrstr2 = staticjson::to_json_string(m);
-    std::cout<<chrstr2<<"\n";
+    //std::cout<<chrstr2<<"\n";
+
+    Game g;
 
     return 0;
 }

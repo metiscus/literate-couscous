@@ -12,6 +12,9 @@
 #include "weaponcomponent.h"
 
 
+class Object;
+typedef std::unique_ptr<Object> ObjectPtr;
+
 class Object
 {
     uint32_t id_;
@@ -69,7 +72,7 @@ public:
     void change_quantity(int32_t value);
     void set_quantity(uint32_t value);
 
-    std::unique_ptr<Object> clone() const;
+    ObjectPtr clone() const;
 
     void staticjson_init(staticjson::ObjectHandler *h);
 

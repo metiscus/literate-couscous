@@ -1,6 +1,6 @@
 CXX := g++
 CXXFLAGS := -g -Wall -Wextra -std=c++17 -MD
-LDFLAGS := -L.
+LDFLAGS := -L. -lboost_system -lboost_filesystem
 
 JSON_CFLAGS := -Iextern/StaticJSON/include -Iextern/rapidjson/include
 CXXFLAGS += $(JSON_CFLAGS)
@@ -18,6 +18,7 @@ SRC:=\
 	src/test.cpp\
 	src/maptile.cpp\
 	src/map.cpp\
+	src/game.cpp\
 
 OBJ:=$(SRC:.cpp=.o)
 

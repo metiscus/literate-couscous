@@ -75,7 +75,7 @@ void Object::set_quantity(uint32_t value)
     }
 }
 
-std::unique_ptr<Object> Object::clone() const
+ObjectPtr Object::clone() const
 {
     auto obj = std::make_unique<Object>(id_, type_, name_);
 
