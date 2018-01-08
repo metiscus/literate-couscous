@@ -7,19 +7,53 @@
 #include <sstream>
 #include <staticjson/staticjson.hpp>
 #include "race.h"
+#include "ui/ui.h"
+#include "mainmenustate.h"
 
 const std::string Game::s_data_path_ = "./data/";
 
 namespace fs = boost::filesystem;
 
+namespace {
+    std::shared_ptr<Game> g_game;
+}
+
+void Game::start()
+{
+    g_game.reset(new Game());
+}
+
+void Game::stop()
+{
+    g_game.reset();
+}
+
+std::shared_ptr<Game> Game::get()
+{
+    return g_game;
+}
+
 Game::Game()
 {
     load_object_blueprints();
     load_races();
+
+    // Create Game Window
+    sf::VideoMode video_mode (1024, 768);
+    
+    //sf::ContextSettings context(24, 8, 4, 3, 2, sf::ContextSettings::Debug);
+    //window_ = std::make_shared<sf::RenderWindow>(video_mode, "Game", sf::Style::Default, context);
+    window_ = std::make_shared<sf::RenderWindow>(video_mode, "Game");
+    window_->setActive(true);
+
+    ui::initialize(window_);
+    
+    push_state(std::make_shared<MainMenuState>(this));  
 }
 
 void Game::new_game()
 {
+    // Create a character
     // Configure time and weather
     LocationInfo here;
     here.latitude = -50.0f;
@@ -46,9 +80,38 @@ void Game::new_game()
     }
 }
 
+void Game::run()
+{
+    // Main game loop
+    sf::Clock clock;
+    
+    while(window_ && window_->isOpen())
+    {
+        // There is no current state to draw
+        if(peek_state() == nullptr)
+        {
+            continue;
+        }
+        else 
+        {
+            // Perform the draw for the current state
+            sf::Time elapsed = clock.restart();
+            float dt = elapsed.asSeconds();
+            
+            peek_state()->handle_input();
+            peek_state()->update(dt);
+            
+            window_->clear();
+            
+            peek_state()->draw(dt);
+            
+            window_->display();
+        }
+    }
+}
+
 void Game::load_game(const std::string& file)
 {
-
 }
 
 void Game::save_game(const std::string& file)
@@ -120,4 +183,44 @@ void Game::load_races()
             }
         }
     }
+}
+
+void Game::push_state(GameStatePtr state)
+{
+    states_.push(state);
+}
+
+void Game::pop_state()
+{
+    states_.pop();
+}
+
+void Game::change_state(GameStatePtr state)
+{
+    if(!states_.empty())
+    {
+        pop_state();
+    }
+    push_state(state);
+}
+
+GameStatePtr Game::peek_state()
+{
+    if(states_.empty()) return GameStatePtr();
+    else return states_.top();
+}
+
+sf::Vector2u Game::get_window_size()
+{
+    sf::Vector2u ret (0, 0);
+    if(window_)
+    {
+        ret = window_->getSize();
+    }
+    return ret;
+}
+
+TextureManager* Game::get_texture_manager()
+{
+    return &texture_manager_;
 }

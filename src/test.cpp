@@ -59,8 +59,8 @@ int main(int argc, char** argv)
     std::string sword = staticjson::to_json_string(*obj);
     std::cout<<sword<<"\n";
 
-    Game g;
-    g.new_game();
+    Game::start();
+    Game::get()->run();
 
     return 0;
 }
