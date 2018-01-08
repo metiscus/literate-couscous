@@ -9,6 +9,7 @@
 #include "race.h"
 #include "ui/ui.h"
 #include "mainmenustate.h"
+#include <glad/glad.h>
 
 const std::string Game::s_data_path_ = "./data/";
 
@@ -41,10 +42,14 @@ Game::Game()
     // Create Game Window
     sf::VideoMode video_mode (1024, 768);
     
-    //sf::ContextSettings context(24, 8, 4, 3, 2, sf::ContextSettings::Debug);
-    //window_ = std::make_shared<sf::RenderWindow>(video_mode, "Game", sf::Style::Default, context);
-    window_ = std::make_shared<sf::RenderWindow>(video_mode, "Game");
+    sf::ContextSettings context(24, 8, 4, 3, 2);
+    window_ = std::make_shared<sf::RenderWindow>(video_mode, "Game", sf::Style::Default, context);
+    //window_ = std::make_shared<sf::RenderWindow>(video_mode, "Game");
     window_->setActive(true);
+
+    if(!gladLoadGL()) {
+        exit(-1);
+    }
 
     ui::initialize(window_);
     
@@ -53,6 +58,7 @@ Game::Game()
 
 void Game::new_game()
 {
+#if 0
     // Create a character
     // Configure time and weather
     LocationInfo here;
@@ -78,6 +84,7 @@ void Game::new_game()
         time_.advance(0, 0, 0, 0, 30, 0);
         weather_.set_time(time_);
     }
+#endif
 }
 
 void Game::run()

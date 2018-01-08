@@ -5,7 +5,7 @@
 #include "nuklear.h"
 #include "nuklear_sfml_gl2.h"
  
-#include <SFML/OpenGL.hpp>
+//#include <SFML/OpenGL.hpp>
 
 #include "game.h"
 

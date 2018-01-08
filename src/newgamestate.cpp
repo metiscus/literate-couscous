@@ -1,21 +1,22 @@
-#include "mainmenustate.h"
 #include "game.h"
 
 #include "newgamestate.h"
+#include <iostream>
 
 #include "ui/ui.h"
 
-MainMenuState::MainMenuState(Game* game)
+NewGameState::NewGameState(Game* game)
     : GameState(game)
 {
+    strcpy(player_name_, "Jakob Strussel");
 }
 
-MainMenuState::~MainMenuState()
+NewGameState::~NewGameState()
 {
 
 }
 
-void MainMenuState::draw(const float dt)
+void NewGameState::draw(const float dt)
 {
     assert(get_window());
     get_window()->setView(view_);
@@ -30,13 +31,25 @@ void MainMenuState::draw(const float dt)
     static float value = 0.6f;
     static int i =  20;
 
-    if (nk_begin(ui::get_context(), "Main Menu", nk_rect(50, 50, 220, 220),
+    if (nk_begin(ui::get_context(), "New Game", nk_rect(50, 50, 500, 400),
     NK_WINDOW_BORDER|NK_WINDOW_TITLE)) 
     {
         /* fixed widget pixel width */
-        nk_layout_row_static(ui::get_context(), 30, 80, 1);
+        //nk_layout_row_static(ui::get_context(), 30, 80, 1);
+        /*
         if (nk_button_label(ui::get_context(), "New Game")) {
-            get_game()->change_state(std::make_shared<NewGameState>(get_game()));
+            //get_game()->change_state(std::make_shared<InGameState>(get_game()));
+        }
+        */
+        nk_layout_row_dynamic(ui::get_context(), 30, 2);
+        nk_label(ui::get_context(), "Character Name: ", NK_TEXT_LEFT);
+        nk_edit_string_zero_terminated(ui::get_context(), NK_EDIT_FIELD|NK_TEXT_EDIT_SINGLE_LINE, player_name_, sizeof(player_name_), nk_filter_ascii);
+        static std::string old = player_name_;
+        std::string ns = player_name_;
+        if(ns != old)
+        {
+            std::cerr<<"New: "<<ns<<"\n";
+            old = ns;
         }
         
         /* fixed widget pixel width */
@@ -83,12 +96,12 @@ void MainMenuState::draw(const float dt)
     nk_sfml_render(NK_ANTI_ALIASING_ON, MAX_VERTEX_BUFFER, MAX_ELEMENT_BUFFER);
 }
 
-void MainMenuState::update(const float dt)
+void NewGameState::update(const float dt)
 {
     // nothing here
 }
 
-void MainMenuState::handle_input()
+void NewGameState::handle_input()
 {
     // Process events
     sf::Event event;

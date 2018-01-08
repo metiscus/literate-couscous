@@ -7,9 +7,9 @@
 #define NK_INCLUDE_DEFAULT_FONT
 
 #define NK_IMPLEMENTATION
-#define NK_SFML_GL2_IMPLEMENTATION
+#define NK_SFML_GL3_IMPLEMENTATION
 
-#include <SFML/OpenGL.hpp>
+//#include <SFML/OpenGL.hpp>
 #include <SFML/Window.hpp>
 
 #include "nuklear.h"

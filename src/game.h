@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <map>
+#include <memory>
 #include <string>
 #include <stack>
 
@@ -14,6 +15,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+
+#include "gamecache.h"
 
 class Game
 {
@@ -34,6 +37,8 @@ class Game
     void load_races();
 
     Game();
+
+    std::shared_ptr<GameCache> cache_;
 
 public:
     // Singleton Commands
@@ -59,6 +64,7 @@ public:
 
     TextureManager* get_texture_manager();
     
+    inline std::shared_ptr<GameCache> get_cache() { return cache_; }
 
     inline std::shared_ptr<sf::RenderWindow> get_window() { return window_; }
 
