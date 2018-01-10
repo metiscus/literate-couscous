@@ -34,22 +34,12 @@ void NewGameState::draw(const float dt)
     struct nk_color background;
     background = nk_rgb(28,48,62);    
     
-    // draw some ui stuff here
-    enum {EASY, HARD};
-    static int op = EASY;
-    static float value = 0.6f;
-    static int i =  20;
-
+    bool do_back = false;
+    bool do_next = false;
+    static int race_selected = 0;
     if (nk_begin(ui::get_context(), "Create your Character", nk_rect(50, 50, 500, 400),
     NK_WINDOW_BORDER|NK_WINDOW_TITLE)) 
     {
-        /* fixed widget pixel width */
-        //nk_layout_row_static(ui::get_context(), 30, 80, 1);
-        /*
-        if (nk_button_label(ui::get_context(), "New Game")) {
-            //get_game()->change_state(std::make_shared<InGameState>(get_game()));
-        }
-        */
         nk_layout_row_dynamic(ui::get_context(), 30, 2);
         nk_label(ui::get_context(), "Character Name: ", NK_TEXT_LEFT);
         nk_edit_string_zero_terminated(ui::get_context(), NK_EDIT_FIELD|NK_TEXT_EDIT_SINGLE_LINE, player_name_, sizeof(player_name_), nk_filter_ascii);
@@ -57,7 +47,6 @@ void NewGameState::draw(const float dt)
         std::string ns = player_name_;
         if(ns != old)
         {
-            std::cerr<<"New: "<<ns<<"\n";
             old = ns;
         }
         
@@ -70,40 +59,20 @@ void NewGameState::draw(const float dt)
 
         nk_layout_row_dynamic(ui::get_context(), 30, 2);
         nk_label(ui::get_context(), "Race: ", NK_TEXT_LEFT);
-        static int race_selected = 0;
         struct nk_vec2 size = {100, 50};
         nk_combobox(ui::get_context(), &race_name_list[0], race_name_list.size(), &race_selected, 20, size);
 
-        /* fixed widget pixel width */
-        nk_layout_row_static(ui::get_context(), 30, 80, 1);
-        if (nk_button_label(ui::get_context(), "Continue")) {
-            //todo transition to next
-        }
-        
-        /* fixed widget pixel width */
-        nk_layout_row_static(ui::get_context(), 30, 80, 1);
-        if (nk_button_label(ui::get_context(), "Exit")) {
-            get_window()->close();
-        }
-
-        /* fixed widget window ratio width */
         nk_layout_row_dynamic(ui::get_context(), 30, 2);
-        if (nk_option_label(ui::get_context(), "easy", op == EASY)) op = EASY;
-        if (nk_option_label(ui::get_context(), "hard", op == HARD)) op = HARD;
-
-        /* custom widget pixel width */
-        nk_layout_row_begin(ui::get_context(), NK_STATIC, 30, 2);
-        {
-            nk_layout_row_push(ui::get_context(), 50);
-            nk_label(ui::get_context(), "Volume:", NK_TEXT_LEFT);
-            nk_layout_row_push(ui::get_context(), 110);
-            nk_slider_float(ui::get_context(), 0, &value, 1.0f, 0.1f);
+        if (nk_button_label(ui::get_context(), "Back")) {
+            do_back = true;
         }
-        nk_layout_row_end(ui::get_context());
+
+        if (nk_button_label(ui::get_context(), "Continue")) {
+            do_next = true;
+        }
     }
     nk_end(ui::get_context());
-    
-    
+
     // Actually handle the drawing here
     /* Draw */
     float bg[4];
@@ -116,6 +85,24 @@ void NewGameState::draw(const float dt)
     * back into a default state. Make sure to either save and restore or
     * reset your own state after drawing rendering the UI. */
     nk_sfml_render(NK_ANTI_ALIASING_ON, MAX_VERTEX_BUFFER, MAX_ELEMENT_BUFFER);
+
+    if(do_back)
+    {
+        //get_window()->close();
+        get_game()->pop_state();
+    }
+
+    if(do_next)
+    {
+        // create the new player
+        auto cache = get_game()->get_cache();
+        auto player = std::make_unique<Player>();
+        player->set_name(std::string(player_name_));
+        player->set_race_id(races_[race_selected].get_id());
+
+        // create the map
+        //\TODO: make a map here
+    }
 }
 
 void NewGameState::update(const float dt)

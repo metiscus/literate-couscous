@@ -27,6 +27,7 @@ namespace ui
     void shutdown();
 
     nk_context* get_context();
+
 }
 
 #endif // UI_H_INCLUDED

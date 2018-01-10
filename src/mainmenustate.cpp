@@ -24,47 +24,31 @@ void MainMenuState::draw(const float dt)
     struct nk_color background;
     background = nk_rgb(28,48,62);    
     
-    // draw some ui stuff here
-    enum {EASY, HARD};
-    static int op = EASY;
     static float value = 0.6f;
     static int i =  20;
+
+    bool do_newgame = false;
+    bool do_exit = false;
 
     if (nk_begin(ui::get_context(), "Main Menu", nk_rect(50, 50, 220, 220),
     NK_WINDOW_BORDER|NK_WINDOW_TITLE)) 
     {
         /* fixed widget pixel width */
-        nk_layout_row_static(ui::get_context(), 30, 80, 1);
+        nk_layout_row_dynamic(ui::get_context(), 30, 2);
         if (nk_button_label(ui::get_context(), "New Game")) {
-            get_game()->change_state(std::make_shared<NewGameState>(get_game()));
+            //get_game()->change_state(std::make_shared<NewGameState>(get_game()));
+            do_newgame = true;
         }
         
-        /* fixed widget pixel width */
-        nk_layout_row_static(ui::get_context(), 30, 80, 1);
+        nk_layout_row_dynamic(ui::get_context(), 30, 2);
         if (nk_button_label(ui::get_context(), "Continue")) {
             //todo transition to next
         }
-        
-        /* fixed widget pixel width */
-        nk_layout_row_static(ui::get_context(), 30, 80, 1);
-        if (nk_button_label(ui::get_context(), "Exit")) {
-            get_window()->close();
-        }
 
-        /* fixed widget window ratio width */
         nk_layout_row_dynamic(ui::get_context(), 30, 2);
-        if (nk_option_label(ui::get_context(), "easy", op == EASY)) op = EASY;
-        if (nk_option_label(ui::get_context(), "hard", op == HARD)) op = HARD;
-
-        /* custom widget pixel width */
-        nk_layout_row_begin(ui::get_context(), NK_STATIC, 30, 2);
-        {
-            nk_layout_row_push(ui::get_context(), 50);
-            nk_label(ui::get_context(), "Volume:", NK_TEXT_LEFT);
-            nk_layout_row_push(ui::get_context(), 110);
-            nk_slider_float(ui::get_context(), 0, &value, 1.0f, 0.1f);
+        if (nk_button_label(ui::get_context(), "Exit")) {
+            do_exit = true;
         }
-        nk_layout_row_end(ui::get_context());
     }
     nk_end(ui::get_context());
     
@@ -81,6 +65,17 @@ void MainMenuState::draw(const float dt)
     * back into a default state. Make sure to either save and restore or
     * reset your own state after drawing rendering the UI. */
     nk_sfml_render(NK_ANTI_ALIASING_ON, MAX_VERTEX_BUFFER, MAX_ELEMENT_BUFFER);
+
+    if(do_newgame)
+    {
+        //get_game()->change_state(std::make_shared<NewGameState>(get_game()));
+        get_game()->push_state(std::make_shared<NewGameState>(get_game()));
+    }
+
+    if(do_exit)
+    {
+        get_window()->close();
+    }
 }
 
 void MainMenuState::update(const float dt)
