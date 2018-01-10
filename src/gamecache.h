@@ -2,9 +2,15 @@
 
 #include "player.h"
 #include "map.h"
+#include "world.h"
 
 struct GameCache
 {
-    std::unique_ptr<Player> player;
-    std::unique_ptr<Map> map;
+    GameCache()
+        : world(new World())
+    {
+    }
+
+
+    std::unique_ptr<World> world;
 };

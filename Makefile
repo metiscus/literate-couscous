@@ -48,6 +48,8 @@ SRC:=\
 	src/ui/window.cpp\
 	src/mainmenustate.cpp\
 	src/newgamestate.cpp\
+	src/world.cpp\
+	src/mapgen.cpp\
 
 OBJ:=$(SRC:.cpp=.o)
 

@@ -48,8 +48,6 @@ public:
 
     void run();
 
-    void new_game();
-
     void load_game(const std::string& file);
     void save_game(const std::string& file);
 

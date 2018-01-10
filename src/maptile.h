@@ -6,7 +6,7 @@
 #include <vector>
 #include <staticjson/staticjson.hpp>
 
-class Object;
+#include "object.h"
 
 enum class TerrainId
 {

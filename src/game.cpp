@@ -58,9 +58,10 @@ Game::Game()
     cache_ = std::make_shared<GameCache>(); 
 }
 
+#if 0
 void Game::new_game()
 {
-#if 0
+
     // Create a character
     // Configure time and weather
     LocationInfo here;
@@ -86,8 +87,8 @@ void Game::new_game()
         time_.advance(0, 0, 0, 0, 30, 0);
         weather_.set_time(time_);
     }
-#endif
 }
+#endif
 
 void Game::run()
 {
