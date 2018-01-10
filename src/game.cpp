@@ -53,7 +53,9 @@ Game::Game()
 
     ui::initialize(window_);
     
-    push_state(std::make_shared<MainMenuState>(this));  
+    push_state(std::make_shared<MainMenuState>(this)); 
+
+    cache_ = std::make_shared<GameCache>(); 
 }
 
 void Game::new_game()

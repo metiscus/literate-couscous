@@ -96,9 +96,9 @@ void NewGameState::draw(const float dt)
     {
         // create the new player
         auto cache = get_game()->get_cache();
-        auto player = std::make_unique<Player>();
-        player->set_name(std::string(player_name_));
-        player->set_race_id(races_[race_selected].get_id());
+        cache->player = std::make_unique<Player>();
+        cache->player->set_name(std::string(player_name_));
+        cache->player->set_race_id(races_[race_selected].get_id());
 
         // create the map
         //\TODO: make a map here
