@@ -9,6 +9,15 @@ NewGameState::NewGameState(Game* game)
     : GameState(game)
 {
     strcpy(player_name_, "Jakob Strussel");
+
+    if(game)
+    {
+        races_ = game->get_races();
+        for(auto race : races_)
+        {
+            race_names_.push_back(race.get_name());
+        }
+    }
 }
 
 NewGameState::~NewGameState()
@@ -31,7 +40,7 @@ void NewGameState::draw(const float dt)
     static float value = 0.6f;
     static int i =  20;
 
-    if (nk_begin(ui::get_context(), "New Game", nk_rect(50, 50, 500, 400),
+    if (nk_begin(ui::get_context(), "Create your Character", nk_rect(50, 50, 500, 400),
     NK_WINDOW_BORDER|NK_WINDOW_TITLE)) 
     {
         /* fixed widget pixel width */
@@ -52,6 +61,19 @@ void NewGameState::draw(const float dt)
             old = ns;
         }
         
+        // Race select
+        std::vector<const char*> race_name_list;
+        for(auto name : race_names_)
+        {
+            race_name_list.push_back(&name[0]);
+        }
+
+        nk_layout_row_dynamic(ui::get_context(), 30, 2);
+        nk_label(ui::get_context(), "Race: ", NK_TEXT_LEFT);
+        static int race_selected = 0;
+        struct nk_vec2 size = {100, 50};
+        nk_combobox(ui::get_context(), &race_name_list[0], race_name_list.size(), &race_selected, 20, size);
+
         /* fixed widget pixel width */
         nk_layout_row_static(ui::get_context(), 30, 80, 1);
         if (nk_button_label(ui::get_context(), "Continue")) {

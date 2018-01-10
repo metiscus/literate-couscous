@@ -231,3 +231,14 @@ TextureManager* Game::get_texture_manager()
 {
     return &texture_manager_;
 }
+
+std::vector<Race> Game::get_races() const
+{
+    std::vector<Race> ret;
+    for(auto pair : races_)
+    {
+        ret.push_back(pair.second);
+    }
+
+    return ret;
+}

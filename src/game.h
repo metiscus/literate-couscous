@@ -68,4 +68,6 @@ public:
 
     inline std::shared_ptr<sf::RenderWindow> get_window() { return window_; }
 
+    std::vector<Race> get_races() const;
+
 };
