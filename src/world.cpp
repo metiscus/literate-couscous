@@ -1,8 +1,10 @@
 #include "world.h"
+#include "game.h"
 #include "mapgen.h"
 
 void World::new_game(std::shared_ptr<Player> player)
 {
+
     player_ = player;
 
     //TODO: Eventually need to load this from somewhere
@@ -25,4 +27,9 @@ void World::new_game(std::shared_ptr<Player> player)
 
     auto map = map_gen.generate_outdoors_map(0);
     maps_.insert(std::make_pair(0, map));
+}
+
+std::shared_ptr<Map> World::get_current_map()
+{
+    return maps_[current_map_];
 }

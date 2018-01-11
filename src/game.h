@@ -17,6 +17,7 @@
 #include <SFML/System.hpp>
 
 #include "gamecache.h"
+#include "tileset.h"
 
 class Game
 {
@@ -29,6 +30,8 @@ class Game
     std::stack<GameStatePtr> states_;
 
     TextureManager texture_manager_;
+
+    Tileset tileset_;
 
     Simtime time_;
     Weather weather_;

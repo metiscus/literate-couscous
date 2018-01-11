@@ -148,6 +148,11 @@ const MapTile& Map::at(Position position) const
     return tiles_[index];
 }
 
+void Map::draw(std::shared_ptr<sf::RenderWindow> window)
+{
+    
+}
+
 void Map::staticjson_init(staticjson::ObjectHandler *h)
 {
     h->add_property("tiles", &tiles_);

@@ -56,6 +56,9 @@ Game::Game()
     push_state(std::make_shared<MainMenuState>(this)); 
 
     cache_ = std::make_shared<GameCache>(); 
+
+
+    tileset_.load("data/gfx/tileset.txt");
 }
 
 #if 0

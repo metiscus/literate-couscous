@@ -1,0 +1,7 @@
+data/gfx/tileset.png
+5
+dirt 0 0 64 64
+floor 64 0 64 64
+grass 128 0 64 64
+walls 0 64 64 64
+water 64 64 64 64

@@ -30,4 +30,7 @@ public:
     const Weather& get_weather() const { return weather_; }
     void set_weather(const Weather& weather) { weather_ = weather; }
 
+    //std::shared_ptr<Map> get_map(uint32_t id);// TODO
+    std::shared_ptr<Map> get_current_map();
+
 };

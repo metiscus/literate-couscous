@@ -50,6 +50,8 @@ SRC:=\
 	src/newgamestate.cpp\
 	src/world.cpp\
 	src/mapgen.cpp\
+	src/ingamestate.cpp\
+	src/tileset.cpp\
 
 OBJ:=$(SRC:.cpp=.o)
 
